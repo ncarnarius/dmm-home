@@ -92,6 +92,8 @@ win.scroll(function(event) {
 
 // ----------------- items scroll up ------------------ //
 
+
+
 $('.revealedBox').each(function(i){ 
 
 	var childrenSpan = $(this).children('span').length;
@@ -104,14 +106,23 @@ $('.revealedBox').each(function(i){
 
 }); 
 
-$(window).scroll(function() { 
-	$('.revealedBox').each(function(i){  
-  if($(window).scrollTop() + $(window).height() > $(this).offset().top ){ 
-  	$(this).addClass('revealedBox-in');       
-  }   
-}); 
+$window = $(window);
+$elem = $('.revealedBox');
+$window.scroll(function(){  
+  var winBottom = ($window.height() - $window.height() * 0.25) + $window.scrollTop();
   
+  $elem.each(function(){
+    var elemTop = $(this).offset().top;
+
+    if (elemTop < winBottom) {
+        // do animation
+      $(this).addClass('revealedBox-in');
+    }
+  });
 });
+
+  
+
 
 
 
